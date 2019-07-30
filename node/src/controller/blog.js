@@ -1,4 +1,4 @@
-export const getList = (author, keyword) => {
+ const getList = (author, keyword) => {
     return [
         {
             id: 1,
@@ -14,3 +14,8 @@ export const getList = (author, keyword) => {
         }
     ]
 } 
+
+module.exports = {
+    getList
+}
+

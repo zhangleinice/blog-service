@@ -7,4 +7,4 @@ const handleUserRouter = (req, res) => {
     }
 }
 
-export default handleUserRouter
+module.exports = handleUserRouter

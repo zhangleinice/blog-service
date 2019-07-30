@@ -1,5 +1,5 @@
-import { getList } from '../controller/blog';
-import { SuccessModel, ErrorModel } from '../model/resModel';
+const { getList } = require('../controller/blog')
+const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 const handleBlogRouter = (req, res) => {
 
@@ -8,10 +8,8 @@ const handleBlogRouter = (req, res) => {
         const keyword = req.query.keyword || ''
         const listData = getList(author, keyword)
         return new SuccessModel(listData)
-        // return {
-        //     msg: '博客列表接口'
-        // }
     }
+    
     if(req.method === 'GET' && req.path === '/api/blog/detail'){
         return {
             msg: '博客详情接口'
@@ -19,4 +17,4 @@ const handleBlogRouter = (req, res) => {
     }
 }
 
-export default handleBlogRouter
+module.exports = handleBlogRouter

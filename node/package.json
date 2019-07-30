@@ -1,0 +1,19 @@
+{
+  "name": "blog1",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.ts",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www.ts"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0"
+  },
+  "dependencies": {
+    "@types/node": "^12.6.8",
+    "typescript": "^3.5.3"
+  }
+}

@@ -1,12 +1,14 @@
-import querystring from 'querystring';
-import handleBlogRouter from './src/router/blog';
-import handleUserRouter from './src/router/user';
+import * as querystring from 'querystring';
+// import handleBlogRouter from './src/router/blog';
+// import handleUserRouter from './src/router/user';
+const handleBlogRouter = require('./src/router/blog')
+const handleUserRouter = require('./src/router/user')
 
 const serverHandle = (req, res) => {
     // 设置返回格式
     res.setHeader('Content-type', 'application/json')
 
-    const url = req.url;
+    const url =req.url;
     const path = url.split('?')[0]
     const query = querystring.parse(url.split('?')[1])
     req.query = query
@@ -14,7 +16,7 @@ const serverHandle = (req, res) => {
 
     // 处理blog路由
     const blogData = handleBlogRouter(req, res)
-    if(blogdata) {
+    if(blogData) {
         res.end(JSON.stringify(blogData))
         return
     }
@@ -32,4 +34,4 @@ const serverHandle = (req, res) => {
     res.end()
 }
 
-export default serverHandle
+ export default  serverHandle
