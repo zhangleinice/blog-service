@@ -36,7 +36,8 @@
         "skipDefaultLibCheck": true,
         // false	生成单个sourcemaps文件，而不是将每sourcemaps生成不同的文件
         "inlineSourceMap": true,
-        "importHelpers": true
+        // 防止解构报错
+        "importHelpers": false
     },
     "include": [
         "./**/*"
