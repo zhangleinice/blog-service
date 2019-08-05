@@ -10,7 +10,7 @@ con.connect()
 // 统一执行sql语句
 export const excu = (sql: string) => {
   const promise = new Promise((resolve, reject) => {
-    con.query('select * from blogs;', (err, result) => {
+    con.query(sql, (err, result) => {
       if (err) {
         reject(err)
         return

@@ -1,23 +1,27 @@
-import { getList } from '../controller/blog'
+import { getList, getDetail, newBlog } from '../controller/blog'
 import { SuccessModel } from '../model/resModel'
+
+export interface Idetail {
+  author: string
+  content: string
+  createtime: number
+  id?: number
+  title: string
+}
 
 const handleBlogRouter = (req, res) => {
   if (req.method === 'GET' && req.path === '/api/blog/list') {
-    // const { author, keyword } = req.query || {}
-    // const listData = getList()
-    // const listData = getList(author, keyword)
-    // return new SuccessModel(listData)
-    // return getList().then(listData => {
-    //   // console.log(listData)
-    //   return listData
-    // })
-    return getList().then(listData => new SuccessModel(listData))
+    const { author, keyword } = req.query
+    return getList(author, keyword).then(listData => new SuccessModel(listData))
   }
 
   if (req.method === 'GET' && req.path === '/api/blog/detail') {
-    return {
-      msg: '博客详情接口'
-    }
+    const { id = 1 } = req.query
+    return getDetail(id).then((data: any) => new SuccessModel(data[0]))
+  }
+
+  if (req.method === 'POST' && req.path === '/api/blog/newBlog') {
+    return newBlog(req.body).then(data => new SuccessModel(data))
   }
 }
 
