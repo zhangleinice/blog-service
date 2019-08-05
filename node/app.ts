@@ -1,4 +1,4 @@
-import * as querystring from 'querystring'
+// import * as querystring from 'querystring'
 import handleBlogRouter from './src/router/blog'
 import handleUserRouter from './src/router/user'
 
@@ -34,18 +34,22 @@ const serverHandle = (req, res) => {
 
   const url = req.url
   const path = url.split('?')[0]
-  const query = querystring.parse(url.split('?')[1])
-  req.query = query
+  // const query = querystring.parse(url.split('?')[1])
+  // req.query = query
   req.path = path
 
   // 处理 post data
   getPostData(req).then(postData => {
     req.body = postData
     // 处理blog路由
-    const blogData = handleBlogRouter(req, res)
-    if (blogData) {
-      res.end(JSON.stringify(blogData))
-      return
+    const blogResult = handleBlogRouter(req, res)
+    console.log(blogResult)
+    if (blogResult) {
+      blogResult.then(data => {
+        //   console.log(data)
+        res.end(JSON.stringify(blogResult))
+        return
+      })
     }
 
     // 处理user路由

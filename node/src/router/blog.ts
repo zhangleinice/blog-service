@@ -3,10 +3,15 @@ import { SuccessModel } from '../model/resModel'
 
 const handleBlogRouter = (req, res) => {
   if (req.method === 'GET' && req.path === '/api/blog/list') {
-    const author = req.query.author || ''
-    const keyword = req.query.keyword || ''
-    const listData = getList(author, keyword)
-    return new SuccessModel(listData)
+    // const { author, keyword } = req.query || {}
+    // const listData = getList()
+    // const listData = getList(author, keyword)
+    // return new SuccessModel(listData)
+    // return getList().then(listData => {
+    //   // console.log(listData)
+    //   return listData
+    // })
+    return getList().then(listData => new SuccessModel(listData))
   }
 
   if (req.method === 'GET' && req.path === '/api/blog/detail') {
