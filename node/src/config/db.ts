@@ -12,6 +12,7 @@ if (env === 'dev') {
   }
 }
 
+// 线上的服务器地址
 if (env === 'production') {
   MYSQL_CONF = {
     host: 'localhost',

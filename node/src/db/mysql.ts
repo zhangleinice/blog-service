@@ -20,3 +20,7 @@ export const excu = (sql: string) => {
   })
   return promise
 }
+
+// 不需要关闭，类似一个单例模式，只创建一次
+// 关闭连接
+// con.end()

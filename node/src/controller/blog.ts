@@ -17,6 +17,7 @@ export const getList = (author?: string, keyword?: string) => {
     sql += `and title like '%${keyword}' `
   }
   sql += `order by id desc;`
+  // 返回一个peomise
   return excu(sql)
 }
 
