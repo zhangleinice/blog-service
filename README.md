@@ -21,3 +21,12 @@
 4. controller
 5. servers
 6. api
+
+### cookie
+1. 最大存储5kb
+2. 跨域不共享
+3. 发送http请求会携带cookie
+4. 浏览器可修改cookie，追加的方式（有限制）
+5. server端可修改cookie返给浏览器（set-cookie）
+6. httpOnly：允许后端改cookie，不允许前端改cookie（保证安全性）
+
