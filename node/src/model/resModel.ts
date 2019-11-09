@@ -1,6 +1,6 @@
 export class BaseModel {
   // ts中形参默认为private
-  constructor(public data, public message?) {
+  constructor(public data?, public message?) {
     if (typeof data === 'string') {
       this.message = data
       data = null
@@ -17,7 +17,7 @@ export class BaseModel {
 
 export class SuccessModel extends BaseModel {
   public errno: number
-  constructor(data, message?) {
+  constructor(data?, message?) {
     super(data, message)
     this.errno = 0
   }

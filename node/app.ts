@@ -38,6 +38,15 @@ const serverHandle = (req, res) => {
   req.query = query
   req.path = path
 
+  // 解析cookie
+  req.cookie = {}
+  let cookieStr = req.headers.cookie || '';
+  cookieStr.split(';').forEach(item => {
+    if(!item) return;
+    const [key, value = ''] = item.split('=');
+    req.cookie[key.trim()] = value.trim()
+  });
+
   // 处理 post data
   getPostData(req).then((postData: any) => {
     req.body = postData
@@ -54,7 +63,7 @@ const serverHandle = (req, res) => {
     const userResult: any = handleUserRouter(req, res)
     if (userResult) {
       userResult.then(data => {
-        res.end(JSON.stringify(data))
+        res.end(JSON.stringify(data)) 
       })
       return
     }
