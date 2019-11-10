@@ -1,6 +1,7 @@
 import * as querystring from 'querystring'
 import handleBlogRouter from './src/router/blog'
 import handleUserRouter from './src/router/user'
+import { getCookieExpires } from './src/util';
 
 // 处理post请求
 const getPostData = req => {
@@ -28,6 +29,8 @@ const getPostData = req => {
   return promise
 }
 
+const SESSION_DATA = { }
+
 const serverHandle = (req, res) => {
   // 设置返回格式
   res.setHeader('Content-type', 'application/json')
@@ -43,9 +46,23 @@ const serverHandle = (req, res) => {
   let cookieStr = req.headers.cookie || '';
   cookieStr.split(';').forEach(item => {
     if(!item) return;
-    const [key, value = ''] = item.split('=');
+    const [ key, value = '' ] = item.split('=');
     req.cookie[key.trim()] = value.trim()
   });
+
+  // 解析session
+  let needCookie: boolean = false
+  let userId = req.cookie.userid
+  if(userId) {
+    if(!SESSION_DATA[userId]){
+      SESSION_DATA[userId] = {}
+    }
+  }else{
+    needCookie = true    
+    userId = `${Date.now()}_${Math.random()}`
+    SESSION_DATA[userId] = {}
+  }
+  req.session = SESSION_DATA[userId]
 
   // 处理 post data
   getPostData(req).then((postData: any) => {
@@ -54,6 +71,9 @@ const serverHandle = (req, res) => {
     const blogResult: any = handleBlogRouter(req, res)
     if (blogResult) {
       blogResult.then(data => {
+        if(needCookie) {
+          res.setHeader('Set-Cookie', `username=${data.username}; path=/; httpOnly; expires=${getCookieExpires()};`)
+        }
         res.end(JSON.stringify(data))
       })
       return
@@ -63,6 +83,9 @@ const serverHandle = (req, res) => {
     const userResult: any = handleUserRouter(req, res)
     if (userResult) {
       userResult.then(data => {
+        if(needCookie) {
+          res.setHeader('Set-Cookie', `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()};`)
+        }
         res.end(JSON.stringify(data)) 
       })
       return

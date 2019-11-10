@@ -28,5 +28,10 @@
 3. 发送http请求会携带cookie
 4. 浏览器可修改cookie，追加的方式（有限制）
 5. server端可修改cookie返给浏览器（set-cookie）
-6. httpOnly：允许后端改cookie，不允许前端改cookie（保证安全性）
+6. httpOnly：允许后端改cookie，不允许前端改cookie（保证安全性）;前端能设置上去，但是不生效
+
+### session
+1. cookie存username，会暴露，很危险
+2. 如何解决：cookie存userid，在server端对应username
+3. 解决方案：session：即server端存储用户信息
 
