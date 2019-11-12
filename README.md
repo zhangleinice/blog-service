@@ -35,3 +35,9 @@
 2. 如何解决：cookie存userid，在server端对应username
 3. 解决方案：session：即server端存储用户信息
 
+
+### redis
+1. session的问题
+   - 目前session是js变量，放在nodejs进程内存中
+   - 第一，进程内存有限，访问量过大，内存暴增怎么办？
+   - 第二，正式线上是多进程，进程之间无法共享内存

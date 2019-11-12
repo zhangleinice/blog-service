@@ -1,8 +1,8 @@
 import * as mysql from 'mysql'
-import MYSQL_CONF from '../config/db'
+import dbConfig from '../config/db'
 
 // 创建连接对象
-const con = mysql.createConnection(MYSQL_CONF)
+const con = mysql.createConnection(dbConfig.MYSQL_CONF)
 
 // 连接
 con.connect()
