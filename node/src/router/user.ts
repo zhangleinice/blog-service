@@ -3,9 +3,9 @@ import { login } from '../controller/user'
 
 const handleUserRouter = (req, res) => {
   // 登录
-  if (req.method === 'GET' && req.path === '/api/user/login') {
-    // const { username, password } = req.body
-    const { username, password } = req.query
+  if (req.method === 'POST' && req.path === '/api/user/login') {
+    const { username, password } = req.body
+    // const { username, password } = req.query
     return login(username, password).then((data: any) => {
       if(data.username){
         // 设置session

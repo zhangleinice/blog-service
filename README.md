@@ -41,3 +41,24 @@
    - 目前session是js变量，放在nodejs进程内存中
    - 第一，进程内存有限，访问量过大，内存暴增怎么办？
    - 第二，正式线上是多进程，进程之间无法共享内存
+
+### nginx
+1. cookie跨域不共享，前端和server端必须同域
+2. 需要ngnix代理，让前后端同域
+3. nginx代理配置
+```conf
+    # 将 / 代理到8001端口
+    # 将 /api/ 代理到8000端口
+    # 统一在8080端口访问
+    server {
+        listen       8080;
+        server_name  localhost;
+
+        location / {
+            proxy_pass http://localhost:8001;
+        }
+        location /api/ {
+            proxy_pass http://localhost:8000;
+            proxy_set_header Host $host;
+        }
+```

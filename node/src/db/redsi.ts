@@ -27,9 +27,10 @@ export const get = key => {
                 resolve(null)
                 return
             }
+            // 如果是json就返回json，否则就直接返回
             try {
                 resolve(JSON.parse(val))
-            } catch (error) {
+            } catch (error) { 
                 resolve(val)
             }
         })
